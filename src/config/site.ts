@@ -17,7 +17,7 @@ export const site = {
   github: 'https://github.com/omshindee' as string,
   linkedin: 'https://www.linkedin.com/in/om-shinde-9bb000209/',
   /** Public URL after deployment; used for canonical/OG tags and the sitemap. */
-  url: 'https://om-shinde.pages.dev',
+  url: 'https://omshinde.pages.dev',
 } as const
 
 export const navItems = [

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://om-shinde.pages.dev/sitemap.xml
+Sitemap: https://omshinde.pages.dev/sitemap.xml

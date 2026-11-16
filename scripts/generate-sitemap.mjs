@@ -1,7 +1,7 @@
 // Writes dist/sitemap.xml after `vite build`. Set SITE_URL to your deployed domain.
 import { readFileSync, writeFileSync } from 'node:fs'
 
-const site = (process.env.SITE_URL || 'https://om-shinde.pages.dev').replace(/\/$/, '')
+const site = (process.env.SITE_URL || 'https://omshinde.pages.dev').replace(/\/$/, '')
 const projectsSrc = readFileSync(new URL('../src/data/projects.ts', import.meta.url), 'utf8')
 const slugs = [...projectsSrc.matchAll(/^\s{4}slug: '([^']+)'/gm)].map((m) => m[1])
 const routes = ['/', '/about', '/projects', '/skills', '/education', '/contact', ...slugs.map((s) => `/projects/${s}`)]

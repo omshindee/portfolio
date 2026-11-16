@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%90%B1%3C/text%3E%3C/svg%3E">
+  <title>Kitty Lander</title>
+  <style>
+    :root {
+      --sky-top: #bfe3f5;
+      --sky-bottom: #e8f6fc;
+      --ink: #2b1d14;
+      --cream: #fff8e8;
+      --orange: #f58c40;
+      --green: #5cb854;
+      --error: #e04b40;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; width: 100%; height: 100%;
+      overflow: hidden; background: #31507a;
+      font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+      -webkit-user-select: none; user-select: none;
+    }
+    #unity-canvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      display: block; background: var(--sky-top); outline: none;
+      touch-action: none;
+    }
+    #overlay {
+      position: fixed; inset: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(var(--sky-top), var(--sky-bottom));
+      transition: opacity .35s ease;
+    }
+    #overlay.hidden { opacity: 0; pointer-events: none; }
+    .card {
+      width: min(560px, 92vw); padding: 28px 28px 24px;
+      background: var(--cream); border: 6px solid var(--ink); border-radius: 28px;
+      box-shadow: 0 10px 0 rgba(43, 29, 20, .25); text-align: center; color: var(--ink);
+    }
+    h1 {
+      margin: 0 0 6px; font-size: clamp(30px, 6vw, 46px); letter-spacing: 2px;
+      color: #ffd14d; -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill;
+      text-shadow: 3px 3px 0 var(--ink);
+    }
+    .sub { margin: 0 0 18px; font-size: 16px; opacity: .85; }
+    .bar {
+      position: relative; height: 26px; border: 4px solid var(--ink); border-radius: 14px;
+      background: #f1e3c8; overflow: hidden;
+    }
+    .bar > div {
+      height: 100%; width: 0%; background: var(--green);
+      transition: width .15s linear;
+    }
+    #status { margin: 10px 0 0; font-size: 14px; min-height: 18px; }
+    button.play {
+      margin-top: 16px; padding: 14px 40px; font: inherit; font-size: 24px; font-weight: bold;
+      color: #fff; background: var(--green); border: 5px solid var(--ink); border-radius: 18px;
+      cursor: pointer; text-shadow: 2px 2px 0 var(--ink); box-shadow: 0 6px 0 rgba(43, 29, 20, .3);
+    }
+    button.play:hover { filter: brightness(1.07); }
+    button.play:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(43, 29, 20, .3); }
+    .keys { margin: 14px 0 0; font-size: 13px; opacity: .8; line-height: 1.5; }
+    .note {
+      margin: 14px 0 0; padding: 8px 10px; font-size: 13px; border-radius: 10px;
+      background: #fde7c6; border: 2px solid #e8b56f;
+    }
+    .error h2 { color: var(--error); margin: 0 0 8px; }
+    .error pre {
+      text-align: left; white-space: pre-wrap; word-break: break-word; max-height: 30vh; overflow: auto;
+      font-size: 12px; background: #fff; border: 2px solid #e6d3b3; border-radius: 8px; padding: 8px;
+    }
+    #fullscreen-btn {
+      position: fixed; right: 12px; bottom: 12px; z-index: 5;
+      width: 44px; height: 44px; border-radius: 12px; border: 3px solid var(--ink);
+      background: rgba(255, 248, 232, .85); cursor: pointer; display: none;
+      align-items: center; justify-content: center;
+    }
+    #fullscreen-btn svg { width: 22px; height: 22px; }
+    .hidden-el { display: none !important; }
+    /* Embedded in the portfolio (index.html?embed=1): the host page shows loading/errors. */
+    body.embedded #overlay, body.embedded #fullscreen-btn { display: none !important; }
+  </style>
+</head>
+<body>
+  <canvas id="unity-canvas" tabindex="-1"></canvas>
+
+  <div id="overlay">
+    <div class="card" id="card-loading">
+      <h1>KITTY LANDER</h1>
+      <p class="sub">Grab every fish, then land the kitty gently on the pad.</p>
+      <div class="bar"><div id="progress"></div></div>
+      <p id="status">Loading…</p>
+      <button class="play hidden-el" id="play-btn" type="button">Click to play</button>
+      <p class="keys">W / Up / Space: thrust &nbsp;·&nbsp; A D / Left Right: steer<br>R: restart &nbsp;·&nbsp; P / Esc: pause &nbsp;·&nbsp; F: fullscreen</p>
+      <p class="note hidden-el" id="touch-note">Kitty Lander is made for a keyboard (or gamepad). Touch controls are not available yet.</p>
+    </div>
+    <div class="card error hidden-el" id="card-error">
+      <h2>Oops, the kitty couldn't take off</h2>
+      <p id="error-text"></p>
+      <pre id="error-detail" class="hidden-el"></pre>
+      <button class="play" type="button" onclick="location.reload()">Try again</button>
+    </div>
+  </div>
+
+  <button id="fullscreen-btn" type="button" title="Fullscreen (F)" aria-label="Fullscreen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#2b1d14" stroke-width="3" stroke-linecap="round">
+      <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>
+    </svg>
+  </button>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById("unity-canvas");
+      var overlay = document.getElementById("overlay");
+      var progress = document.getElementById("progress");
+      var statusEl = document.getElementById("status");
+      var playBtn = document.getElementById("play-btn");
+      var fsBtn = document.getElementById("fullscreen-btn");
+      var unityInstance = null;
+      var failed = false;
+
+      // Embedded mode: loaded as index.html?embed=1 inside the portfolio's game player.
+      // The visitor already clicked Play there, so start immediately and report progress upward.
+      var embedded = new URLSearchParams(location.search).get("embed") === "1" && window.parent !== window;
+      if (embedded) document.body.classList.add("embedded");
+      function notify(type, extra) {
+        if (!embedded) return;
+        var msg = { source: "kitty-lander", type: type };
+        if (extra) for (var k in extra) msg[k] = extra[k];
+        try { window.parent.postMessage(msg, location.origin); } catch (e) {}
+      }
+
+      function showError(message, detail) {
+        if (failed) return;
+        failed = true;
+        notify("error", { message: message + (detail ? " (" + String(detail) + ")" : "") });
+        document.getElementById("card-loading").classList.add("hidden-el");
+        document.getElementById("card-error").classList.remove("hidden-el");
+        document.getElementById("error-text").textContent = message;
+        if (detail) {
+          var pre = document.getElementById("error-detail");
+          pre.textContent = String(detail);
+          pre.classList.remove("hidden-el");
+        }
+        overlay.classList.remove("hidden");
+      }
+
+      // Unity reports warnings/errors through this callback.
+      function unityShowBanner(msg, type) {
+        if (type === "error") showError("Something went wrong while running the game.", msg);
+        else console.warn("[Unity]", msg);
+      }
+
+      // --- browser support -----------------------------------------------------
+      var gl = null;
+      try { gl = document.createElement("canvas").getContext("webgl2"); } catch (e) {}
+      if (!gl) {
+        showError("Your browser doesn't support WebGL 2, which this game needs. " +
+                  "Please use a recent version of Chrome, Edge, Firefox or Safari, " +
+                  "and make sure hardware acceleration is turned on.");
+        return;
+      }
+      var coarseOnly = window.matchMedia && matchMedia("(pointer: coarse)").matches && !matchMedia("(any-pointer: fine)").matches;
+      if (coarseOnly) document.getElementById("touch-note").classList.remove("hidden-el");
+
+      // Keep the page from scrolling with game keys if the game sits inside a scrollable page.
+      window.addEventListener("keydown", function (e) {
+        if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) >= 0) e.preventDefault();
+      }, { passive: false });
+      canvas.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+
+      // --- load ------------------------------------------------------------------
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Web.loader.js";
+      var config = {
+        arguments: [],
+        dataUrl: buildUrl + "/Web.data.br",
+        frameworkUrl: buildUrl + "/Web.framework.js.br",
+        codeUrl: buildUrl + "/Web.wasm.br",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Kitty Lander",
+        productVersion: "1.0",
+        showBanner: unityShowBanner,
+      };
+
+      var t0 = performance.now();
+      window.kittyLanderTiming = { start: t0 };
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onerror = function () {
+        showError("The game files could not be downloaded. Check your connection and try again.", loaderUrl);
+      };
+      script.onload = function () {
+        createUnityInstance(canvas, config, function (p) {
+          var pct = Math.round(p * 100);
+          progress.style.width = pct + "%";
+          statusEl.textContent = pct < 90 ? "Loading… " + pct + "%" : "Warming up the thrusters…";
+          notify("progress", { progress: p });
+        }).then(function (instance) {
+          unityInstance = instance;
+          window.unityInstance = instance;
+          window.kittyLanderTiming.loadedMs = Math.round(performance.now() - t0);
+          progress.style.width = "100%";
+          statusEl.textContent = "Ready!";
+          if (embedded) {
+            overlay.classList.add("hidden");
+            canvas.focus();
+            notify("ready");
+            return;
+          }
+          playBtn.classList.remove("hidden-el");
+          playBtn.focus();
+        }).catch(function (message) {
+          showError("The game failed to start.", message);
+        });
+      };
+      document.body.appendChild(script);
+
+      // --- start (user gesture: unlocks audio and gives the game keyboard focus) ---
+      playBtn.addEventListener("click", function () {
+        overlay.classList.add("hidden");
+        fsBtn.style.display = "flex";
+        canvas.focus();
+      });
+
+      // --- fullscreen --------------------------------------------------------------
+      fsBtn.addEventListener("click", function () {
+        if (unityInstance) unityInstance.SetFullscreen(document.fullscreenElement ? 0 : 1);
+        canvas.focus();
+      });
+      if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) fsBtn.classList.add("hidden-el");
+
+      // Clicking the game area always returns keyboard focus to it.
+      canvas.addEventListener("pointerdown", function () { canvas.focus(); });
+    })();
+  </script>
+</body>
+</html>

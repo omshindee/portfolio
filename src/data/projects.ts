@@ -173,6 +173,7 @@ export const projects: Project[] = [
     featured: true,
     tech: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'Spring Data JPA', 'Hibernate', 'PostgreSQL', 'React', 'REST APIs'],
     thumbnail: 'social',
+    thumbnailImage: '/projects/TechyIcon.webp',
     // To use your own image instead: put it in public/projects/ and set e.g. thumbnailImage: '/projects/<file>.webp'
     overview: [
       'Techy is a social platform designed for developers. Users create profiles, publish posts about what they are building or learning, follow other developers and interact through likes and comments.',

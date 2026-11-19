@@ -115,6 +115,29 @@ function Lander() {
   )
 }
 
+function Quiz() {
+  return (
+    <>
+      <path
+        d="M0 150 L28 138 L52 146 L78 128 L104 134 L120 152 L170 152 L186 132 L214 140 L238 118 L266 130 L292 112 L320 124 V180 H0 Z"
+        fill="#18212d"
+        stroke={C.line}
+      />
+      <rect x="126" y="150" width="38" height="3" fill={C.ok} />
+      <path d="M40 34 Q120 30 145 128" fill="none" stroke={C.accent} strokeDasharray="3 4" opacity="0.8" />
+      <g transform="translate(145 126)">
+        <path d="M-7 4 L0 -10 L7 4 Z" fill="#1d3247" stroke={C.accent2} />
+        <path d="M-4 4 L-7 9 M4 4 L7 9" stroke={C.accent2} />
+      </g>
+      <g fontFamily="JetBrains Mono, monospace" fontSize="8.5" fill={C.dim}>
+        <text x="22" y="22">vx  0.42</text>
+        <text x="82" y="22">vy -1.10</text>
+        <text x="142" y="22">alt 12.4</text>
+      </g>
+    </>
+  )
+}
+
 export function ProjectThumbnail({ project, className = '' }: { project: Project; className?: string }) {
   if (project.thumbnailImage) {
     return (
@@ -133,6 +156,7 @@ export function ProjectThumbnail({ project, className = '' }: { project: Project
       {project.thumbnail === 'aegis' && <Aegis />}
       {project.thumbnail === 'social' && <Social />}
       {project.thumbnail === 'lander' && <Lander />}
+      {project.thumbnail === 'quiz' && <Quiz />}
     </svg>
   )
 }

@@ -54,7 +54,8 @@ export const projects: Project[] = [
       'Docker',
     ],
     thumbnail: 'aegis',
-    // To use your own image instead: put it in public/projects/ and set e.g. thumbnailImage: '/projects/<file>.webp'
+    thumbnailImage: '/projects/AegisIcon.webp',
+
     overview: [
       'AEGIS is a multi-component security platform. A Windows endpoint agent and an SDN network sensor send normalised telemetry to a central Spring Boot server, which validates, stores and correlates events, scores risk and opens incidents.',
       'A separate Python service provides Isolation Forest anomaly scores, and a React dashboard gives administrators a view of endpoints, incidents and attack timelines — built entirely from real data received by the server.',
@@ -161,7 +162,44 @@ export const projects: Project[] = [
       { label: 'Languages', value: 'C++ · Java · Python · TS' },
       { label: 'Automated tests', value: '110+' },
     ],
-    screenshots: [],
+    screenshots: [
+  {
+    src: '/projects/aegis/AgentMonitoringOnEmployeePC.jpg',
+    caption: 'Windows endpoint agent monitoring employee activity',
+  },
+  {
+    src: '/projects/aegis/AlertsAndIncidents.jpg',
+    caption: 'Security alerts and incident management',
+  },
+  {
+    src: '/projects/aegis/dashboard.jpg',
+    caption: 'Centralized endpoint monitoring dashboard',
+  },
+  {
+    src: '/projects/aegis/EndpointsAndEvents.jpg',
+    caption: 'Monitored endpoints and collected security events',
+  },
+  {
+    src: '/projects/aegis/IncidentsDetails.jpg',
+    caption: 'Detailed incident investigation and analysis',
+  },
+  {
+    src: '/projects/aegis/login.jpg',
+    caption: 'AEGIS authentication interface',
+  },
+  {
+    src: '/projects/aegis/MLservice.jpg',
+    caption: 'Machine learning service and anomaly detection',
+  },
+  {
+    src: '/projects/aegis/NetShieldX.jpg',
+    caption: 'NetShield-X network monitoring component',
+  },
+  {
+    src: '/projects/aegis/TelemetryEventsOfRunningProcesses.jpg',
+    caption: 'Process telemetry and endpoint event monitoring',
+  },
+],
   },
   {
     slug: 'techy',
@@ -169,12 +207,16 @@ export const projects: Project[] = [
     subtitle: 'Developer Social Network',
     tagline: 'A full-stack social platform for developers to share technical content, progress and projects.',
     categories: ['software-engineering'],
-    status: 'active',
+    status: 'completed',
     featured: true,
+
+    repo: 'https://github.com/omshindee/techy',
+    demo: 'https://techyhub.pages.dev',
+
     tech: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'Spring Data JPA', 'Hibernate', 'PostgreSQL', 'React', 'REST APIs'],
     thumbnail: 'social',
     thumbnailImage: '/projects/TechyIcon.webp',
-    // To use your own image instead: put it in public/projects/ and set e.g. thumbnailImage: '/projects/<file>.webp'
+
     overview: [
       'Techy is a social platform designed for developers. Users create profiles, publish posts about what they are building or learning, follow other developers and interact through likes and comments.',
       'An interest-based personalised feed surfaces content that matches what each user cares about, instead of a purely chronological timeline.',
@@ -234,7 +276,36 @@ export const projects: Project[] = [
         solution: 'Enforced the layered architecture so new features add a controller, service and repository without cross-cutting changes.',
       },
     ],
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/projects/techy/home.jpeg',
+        caption: 'Techy homepage and personalized feed',
+      },
+      {
+        src: '/projects/techy/profile.jpeg',
+        caption: 'User profile and social activity',
+      },
+      {
+        src: '/projects/techy/editProfile.jpeg',
+        caption: 'Profile editing interface',
+      },
+      {
+        src: '/projects/techy/post.jpeg',
+        caption: 'Creating and sharing posts',
+      },
+      {
+        src: '/projects/techy/message.jpeg',
+        caption: 'Real-time messaging interface',
+      },
+      {
+        src: '/projects/techy/notifications.jpeg',
+        caption: 'User notifications',
+      },
+      {
+        src: '/projects/techy/settings.jpeg',
+        caption: 'Account settings and preferences',
+      },
+    ],
   },
   {
     slug: 'kitty-lander',
@@ -245,10 +316,11 @@ export const projects: Project[] = [
     status: 'completed',
     statusNote: 'Playable in the browser',
     featured: true,
+    repo: 'https://github.com/omshindee/kitty-lander',
     tech: ['C#', 'Unity', 'Unity 2D Physics', 'WebGL'],
     thumbnail: 'lander',
     thumbnailImage: '/projects/KittyLanderIcon.webp',
-    // To use your own image instead: put it in public/projects/ and set e.g. thumbnailImage: '/projects/<file>.webp'
+
     overview: [
       'Kitty Lander is a 2D landing game where the player controls a spacecraft and must touch down safely by managing thrust, steering and descent speed.',
       'The project focuses on gameplay systems: physics-driven movement, landing condition checks and a UI that gives the player clear feedback.',
@@ -280,7 +352,21 @@ export const projects: Project[] = [
         solution: 'Tuned forces and handled input separately from physics updates so movement stays consistent across frame rates.',
       },
     ],
-    screenshots: [],
+
+    screenshots: [
+      {
+        src: '/projects/kitty/main_menu.png',
+        caption: 'Main menu and game navigation',
+      },
+      {
+        src: '/projects/kitty/levels.png',
+        caption: 'Level selection interface',
+      },
+      {
+        src: '/projects/kitty/gameplay.png',
+        caption: 'Gameplay featuring physics-based lunar landing mechanics',
+      },
+    ],
     game: {
       id: 'kitty-lander',
       // Build files are copied in by `npm run sync:kitty-lander` (Brotli-compressed, ~14.4 MB).
@@ -304,6 +390,174 @@ export const projects: Project[] = [
       ],
       notes: 'Best played on a desktop browser with a keyboard. 11 levels · ~14 MB download.',
     },
+  },
+
+  {
+    slug: 'quickquiz',
+    title: 'QuickQuiz',
+    subtitle: 'Online Quiz & Assessment Platform',
+    tagline: 'A web-based assessment platform for creating quizzes, conducting timed attempts and tracking results.',
+    categories: ['software-engineering'],
+    status: 'completed',
+    statusNote: 'Completed · Local development',
+    year: '2026',
+    featured: true,
+    tech: [
+      'C#',
+      'ASP.NET Core MVC',
+      '.NET 10',
+      'Entity Framework Core',
+      'SQL Server',
+      'ASP.NET Core Identity',
+      'Razor Views',
+      'HTML',
+      'CSS',
+      'JavaScript',
+      'jQuery',
+      'Bootstrap',
+    ],
+    thumbnail: 'quiz',
+    thumbnailImage: '/projects/QuickQuizIcon.webp',
+
+    overview: [
+      'QuickQuiz is an online quiz and assessment platform built with C#, ASP.NET Core MVC, Entity Framework Core and Microsoft SQL Server. Administrators can create and manage quizzes, while students can browse published assessments, take timed quizzes and review their results.',
+      'The application evaluates submitted answers on the server, maintains individual attempt history and provides a leaderboard for comparing assessment performance.',
+    ],
+    problem:
+      'Creating, conducting and evaluating quizzes manually can become repetitive and time-consuming. QuickQuiz brings quiz management, timed assessment attempts, automatic scoring and performance tracking into one web application.',
+    architecture: {
+      summary:
+        'An ASP.NET Core MVC application handles browser requests through controllers and Razor views. Application services contain quiz and scoring workflows, Entity Framework Core maps application entities to relational tables, and SQL Server stores users, quizzes, questions and attempts.',
+      layers: [
+        {
+          label: 'Presentation',
+          nodes: [
+            {
+              name: 'Browser Interface',
+              tech: 'Razor Views · HTML · CSS · Bootstrap',
+              detail: 'Renders authentication, quiz browsing, timed assessment, results and administration screens.',
+            },
+            {
+              name: 'Client-side Interactions',
+              tech: 'JavaScript · jQuery',
+              detail: 'Supports interactive forms, quiz timing and dynamic question editing in the admin interface.',
+            },
+          ],
+        },
+        {
+          label: 'Application',
+          nodes: [
+            {
+              name: 'MVC Controllers',
+              tech: 'ASP.NET Core MVC',
+              detail: 'Handle HTTP requests, validate input and coordinate application workflows.',
+            },
+            {
+              name: 'Quiz Service',
+              tech: 'C# · ASP.NET Core',
+              detail: 'Manages published quizzes, assessment submissions and server-side score calculation.',
+            },
+            {
+              name: 'Authentication & Authorization',
+              tech: 'ASP.NET Core Identity',
+              detail: 'Provides account registration, sign-in and role-based access for administrators and students.',
+            },
+            {
+              name: 'Quiz API',
+              tech: 'ASP.NET Core Web API · JSON',
+              detail: 'Exposes published quiz listings and quiz details without revealing correct answers.',
+            },
+          ],
+        },
+        {
+          label: 'Persistence',
+          nodes: [
+            {
+              name: 'Object-Relational Mapping',
+              tech: 'Entity Framework Core',
+              detail: 'Maps C# entities and relationships to relational database tables and executes data queries.',
+            },
+            {
+              name: 'Database',
+              tech: 'Microsoft SQL Server',
+              detail: 'Stores application users, roles, quizzes, questions, attempts and submitted answers.',
+            },
+          ],
+        },
+      ],
+    },
+    implementation: [
+      {
+        title: 'Role-based access control',
+        detail:
+          'Uses ASP.NET Core Identity and authorization policies to separate administrator capabilities from student workflows and protect quiz-management routes.',
+      },
+      {
+        title: 'Quiz authoring and management',
+        detail:
+          'Administrators can create, edit, publish, unpublish and delete quizzes, add multiple-choice questions and manage assessment content through the web interface.',
+      },
+      {
+        title: 'Timed assessment attempts',
+        detail:
+          'Students can attempt published quizzes within a configured duration. The application records the attempt and applies server-side duration checks when processing submissions.',
+      },
+      {
+        title: 'Server-side automatic evaluation',
+        detail:
+          'Submitted answers are evaluated by application-side scoring logic, and the resulting score and answer details are stored for later review.',
+      },
+      {
+        title: 'Results and leaderboard',
+        detail:
+          'Students can review their previous attempts and results, while the leaderboard displays top assessment scores.',
+      },
+      {
+        title: 'Entity Framework Core integration',
+        detail:
+          'Uses EF Core to map application entities and relationships to SQL Server and perform database operations through the DbContext.',
+      },
+    ],
+    challenges: [
+      {
+        challenge: 'Separating administrative operations from student assessment workflows.',
+        solution:
+          'Applied role-based authorization so quiz-management actions are restricted to users with the Admin role, while students use the assessment features.',
+      },
+      {
+        challenge: 'Ensuring quiz scores are not determined solely by client-side code.',
+        solution:
+          'Performed answer evaluation on the server and exposed quiz API responses without including correct-answer values.',
+      },
+      {
+        challenge: 'Representing quizzes, questions, attempts and answers as related data.',
+        solution:
+          'Modelled the relationships with C# entities and used Entity Framework Core to persist and query the relational data in SQL Server.',
+      },
+    ],
+    highlights: [
+      { label: 'User roles', value: 'Admin · Student' },
+      { label: 'Assessment', value: 'Timed · Auto-scored' },
+      { label: 'Backend', value: 'ASP.NET Core MVC' },
+    ],
+    screenshots: [
+      {
+        src: '/projects/quickquiz/homepage.png',
+        caption: 'QuickQuiz homepage',
+      },
+      {
+        src: '/projects/quickquiz/admin-dashboard.png',
+        caption: 'Administrator dashboard and quiz management',
+      },
+      {
+        src: '/projects/quickquiz/quiz-attempt.png',
+        caption: 'Timed quiz assessment interface',
+      },
+      {
+        src: '/projects/quickquiz/results.png',
+        caption: 'Assessment results and leaderboard',
+      },
+    ],
   },
 ]
 

@@ -8,7 +8,7 @@ export interface Category {
 
 export type ProjectStatus = 'active' | 'completed' | 'prototype' | 'planned'
 
-export type ThumbnailVariant = 'aegis' | 'social' | 'lander'
+export type ThumbnailVariant = 'aegis' | 'social' | 'lander' | 'quiz'
 
 export interface ArchitectureNode {
   name: string

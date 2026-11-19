@@ -26,9 +26,11 @@ export default function About() {
                 architecture.
               </p>
               <p>
-                Most of my learning happens by building. I’ve built REST APIs and database-driven applications with Spring
-                Boot, a full-stack developer social network, and an endpoint monitoring and incident response platform that
-                combines a C++ Windows agent, a Spring Boot server, a Python ML service, an SDN sensor and a React dashboard.
+                Most of my learning happens by building. I've developed full-stack applications
+                using Spring Boot and React, built an ASP.NET Core MVC-based quiz and assessment
+                platform with SQL Server, and worked on an endpoint monitoring and incident
+                response platform combining a C++ Windows agent, Spring Boot server, Python ML
+                service, SDN sensor and React dashboard.
               </p>
               <p>
                 I’m most interested in the parts of software that are usually hidden — how processes and threads behave, how

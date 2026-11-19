@@ -110,8 +110,14 @@ export default function ProjectDetail() {
             {project.screenshots.length > 0 ? (
               <div className="grid gap-3 sm:grid-cols-2">
                 {project.screenshots.map((s) => (
-                  <figure key={s.src} className="overflow-hidden rounded-xs border border-line bg-base">
-                    <img src={s.src} alt={s.caption} loading="lazy" decoding="async" className="aspect-video w-full object-cover" />
+                  <figure key={s.src} className="flex flex-col overflow-hidden rounded-xs border border-line bg-base">
+                    <img
+                      src={s.src}
+                      alt={s.caption}
+                      loading="lazy"
+                      decoding="async"
+                      className="mx-auto block h-auto max-h-[700px] w-full object-contain object-center"
+                    />
                     <figcaption className="border-t border-line px-3 py-2 text-[12px] text-fg-muted">{s.caption}</figcaption>
                   </figure>
                 ))}

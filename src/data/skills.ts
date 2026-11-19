@@ -7,15 +7,25 @@ export interface SkillGroup {
 
 /** No ratings or percentages — just what is used, grouped by area. */
 export const skillGroups: SkillGroup[] = [
-  { id: 'languages', label: 'Languages', items: ['C++', 'Java', 'JavaScript', 'Python', 'C#'] },
+  { id: 'languages', label: 'Languages', items: ['C++', 'Java', 'C#', 'JavaScript', 'Python'] },
   {
     id: 'backend',
     label: 'Backend',
-    items: ['Spring Boot', 'Spring Security', 'Spring Data JPA', 'Hibernate', 'JDBC', 'REST APIs', 'Node.js'],
+    items: ['Spring Boot',
+    'Spring Security',
+    'Spring Data JPA',
+    'Hibernate',
+    'ASP.NET Core',
+    'ASP.NET Core MVC',
+    'Entity Framework Core',
+    'ASP.NET Core Identity',
+    'JDBC',
+    'REST APIs',
+    'Node.js'],
   },
-  { id: 'frontend', label: 'Frontend', items: ['React', 'HTML', 'CSS', 'JavaScript'] },
+  { id: 'frontend', label: 'Frontend', items: ['React', 'HTML', 'CSS', 'JavaScript', 'jQuery', 'Bootstrap'] },
   { id: 'systems', label: 'Systems', items: ['Linux', 'Operating Systems', 'TCP/IP', 'POSIX Threads', 'Multithreading'] },
-  { id: 'databases', label: 'Databases', items: ['PostgreSQL', 'MySQL', 'SQLite', 'MongoDB'] },
+  { id: 'databases', label: 'Databases', items: ['PostgreSQL', 'Microsoft SQL Server', 'MySQL', 'SQLite', 'MongoDB'] },
   {
     id: 'tools',
     label: 'Tools',

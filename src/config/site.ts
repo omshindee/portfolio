@@ -9,9 +9,9 @@ export const site = {
   /** Profile photo (public/images). Replace the files to change it. */
   photo: '/images/profile.webp',
   photoSmall: '/images/profile-sm.webp',
-  headline: 'Software Engineer | Computer Science | Systems & Software Development',
+  headline: 'Software Engineer | Java · C# · C++ | Systems & Software Development',
   intro:
-    'I enjoy understanding how software works under the hood, designing practical solutions and building applications that solve real-world problems.',
+    'I enjoy building reliable software systems and exploring the engineering principles behind them. My interests include software development, system design, software architecture, and problem-solving.',
   location: 'Navi Mumbai, India',
   email: 'omshinde24102004@gmail.com',
   github: 'https://github.com/omshindee' as string,

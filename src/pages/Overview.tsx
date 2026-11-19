@@ -48,9 +48,7 @@ export default function Overview() {
               <p className="mt-2 font-mono text-[11.5px] leading-relaxed text-accent sm:mt-1 sm:text-[12.5px]">{site.headline}</p>
               <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-fg">{site.intro}</p>
               <p className="mt-2 hidden max-w-2xl text-[14px] leading-relaxed text-fg-muted sm:block">
-                Computer Science undergraduate with strong foundations in Java, C++, data structures and algorithms and
-                DBMS. I build REST APIs, database-driven applications and multi-service systems, most recently an endpoint
-                monitoring and incident response platform.
+                Computer Science undergraduate with a strong foundation in Java, C++, C#, Object-Oriented Programming, Data Structures and Algorithms, and Database Management Systems. Experienced in building backend and full-stack applications using Spring Boot, ASP.NET Core, React, and SQL databases. Good understanding of System Design principles, including High-Level Design (HLD), Low-Level Design (LLD), software architecture, design patterns, REST API design, database modelling, and scalability considerations. Interested in developing maintainable, efficient, and reliable software systems while continuously strengthening problem-solving and software engineering skills.
               </p>
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11.5px] text-fg-dim">
                 <span className="inline-flex items-center gap-1.5"><MapPin size={12} /> {site.location}</span>

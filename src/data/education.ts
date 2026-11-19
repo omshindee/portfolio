@@ -31,10 +31,14 @@ export const education: EducationEntry[] = [
 export const certifications = [{ title: 'Proficiency in C/C++', year: '2023' }]
 
 export const interests = [
-  { title: 'Systems & OS internals', detail: 'Processes, threads, memory and how programs interact with the operating system.' },
-  { title: 'Backend architecture', detail: 'Layered services, REST API design and data modelling with Spring Boot.' },
-  { title: 'Security engineering', detail: 'Endpoint telemetry, detection pipelines and incident response.' },
-  { title: 'Computer networks', detail: 'TCP/IP, flow-level visibility and software-defined networking.' },
+  {
+  title: 'Backend Architecture',
+  detail: 'Layered application design, REST API development, database integration, and service development using Spring Boot and ASP.NET Core.'
+},
+{
+  title: 'System Design',
+  detail: 'High-Level Design (HLD), Low-Level Design (LLD), SOLID principles, design patterns, scalability, distributed systems, and architectural trade-offs.'
+},
 ]
 
 export const learning = [
